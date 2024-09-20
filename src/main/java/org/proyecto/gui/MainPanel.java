@@ -1,10 +1,13 @@
 package org.proyecto.gui;
 
+import org.proyecto.util.Util;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
-public class MainPanel   {
+public class MainPanel  extends JFrame {
 
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
@@ -12,9 +15,26 @@ public class MainPanel   {
     private JButton buttonAbrir;
     private JTextField textFieldPath;
     private JButton buttonIniciar;
+    private JButton buttonLimpiar;
 
 
     public MainPanel() {
+        setTitle("Proyecto Progra 4 - CDR");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setContentPane(panel1);
+        pack();
+        // resize the frame
+        setSize(800, 400);
+        //center the frame
+        setLocationRelativeTo(null);
+        // make the frame visible
+        setVisible(true);
+
+
+
+
+
         buttonAbrir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,9 +50,9 @@ public class MainPanel   {
 
                 textFieldPath.setText(file);
                 buttonIniciar.setEnabled(true);
-                textAreaConsola.setText("File selected: " + file);
+                textAreaConsola.setText("Archivo Seleccionado: " + file);
                 textAreaConsola.append("\n");
-                textAreaConsola.append("Size file: " + fileChooser.getSelectedFile().length() + " bytes");
+                textAreaConsola.append("Tamaño del archivo: " + fileChooser.getSelectedFile().length() + " bytes");
 
                 int count = 0;
                 try {
@@ -43,7 +63,7 @@ public class MainPanel   {
                     e1.printStackTrace();
                 }
 
-                textAreaConsola.append(count + " lines");
+                textAreaConsola.append(count + " lineas");
 
                 textAreaConsola.append("\n");
 
@@ -51,18 +71,59 @@ public class MainPanel   {
         });
 
 
+        buttonIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (!Util.esFormatoCSVCorrecto(textFieldPath.getText())) {
+                    textAreaConsola.setForeground(Color.RED);
+                    textAreaConsola.append("El archivo no tiene el formato correcto ");
+                    textAreaConsola.append("\n");
+                    textAreaConsola.setForeground(Color.BLACK);
+
+                    // habilitar boton iniciar
+
+                    textAreaConsola.append("\n");
+                    return;
+                }
+
+                //divide  el archivo
+
+                textAreaConsola.append("Dividiendo archivo...");
+                textAreaConsola.append("\n");
+                if (!Util.dividirArchivo(textFieldPath.getText())) {
+
+                    textAreaConsola.append("Error al dividir el archivo ");
+                    textAreaConsola.append("\n");
+
+                    return;
+                }
+                textAreaConsola.append("Archivo dividido");
+                textAreaConsola.append("\n");
+                buttonIniciar.setEnabled(false);
+
+                buttonAbrir.setEnabled(false);
+                textAreaConsola.append("Iniciando procesamiento...");
+                textAreaConsola.append("\n");
+
+            }
+        });
+        buttonLimpiar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textAreaConsola.setText("");
+                textFieldPath.setText("");
+                buttonIniciar.setEnabled(false);
+                buttonAbrir.setEnabled(true);
+            }
+        });
     }
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Proyecto Progra 4 - CDR");
-        frame.setContentPane(new MainPanel().panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        // resize the frame
-        frame.setSize(600, 400);
-        //center the frame
-        frame.setLocationRelativeTo(null);
-        // make the frame visible
-        frame.setVisible(true);
+
+    // metodo que imprime en consola
+    public void printToConsole(String message) {
+        textAreaConsola.append(message);
+        textAreaConsola.append("\n");
     }
+
 
 }
