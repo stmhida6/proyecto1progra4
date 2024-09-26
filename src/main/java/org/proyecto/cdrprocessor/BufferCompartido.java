@@ -24,4 +24,14 @@ public class BufferCompartido {
     }
 
 
+    public boolean size() {
+
+       // System.out.println(" isEmpty: " +    queue.isEmpty());
+
+        return queue.size() > 0;
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
 }

@@ -2,16 +2,20 @@ package org.proyecto.cdrprocessor;
 
 import java.io.IOException;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
+public class CDR {
+
+    //constructor
+    public CDR() {
+
+
+    }
+    // metodo publica para iniciar el procesamiento de los CDR
+    public void procesarCDR() {
         BufferCompartido buffer = new BufferCompartido(10);
 
-
-        Thread productor1 = new Thread(new CDRProducer(buffer, "part1.txt", "Productor 1"));
-        Thread productor2 = new Thread(new CDRProducer(buffer, "part2.txt", "Productor 2"));
-        Thread productor3 = new Thread(new CDRProducer(buffer, "part3.txt", "Productor 3"));
+        Thread productor1 = new Thread(new CDRProducer(buffer, "part1.csv", "Productor 1"));
+        Thread productor2 = new Thread(new CDRProducer(buffer, "part2.csv", "Productor 2"));
+        Thread productor3 = new Thread(new CDRProducer(buffer, "part3.csv", "Productor 3"));
         productor1.start();
         productor2.start();
         productor3.start();
@@ -47,6 +51,5 @@ public class Main {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-
     }
 }

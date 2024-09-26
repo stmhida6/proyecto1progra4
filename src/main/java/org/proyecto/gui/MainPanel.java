@@ -6,16 +6,24 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import org.proyecto.cdrprocessor.CDR;
 
 public class MainPanel  extends JFrame {
 
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
-    private JTextArea textAreaConsola;
+    public JTextArea textAreaConsola;
     private JButton buttonAbrir;
     private JTextField textFieldPath;
     private JButton buttonIniciar;
     private JButton buttonLimpiar;
+    private JTable table1;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JButton button1;
+    private JComboBox comboBox1;
+
+    private int totalLineasArchivo = 0;
 
 
     public MainPanel() {
@@ -30,10 +38,6 @@ public class MainPanel  extends JFrame {
         setLocationRelativeTo(null);
         // make the frame visible
         setVisible(true);
-
-
-
-
 
         buttonAbrir.addActionListener(new ActionListener() {
             @Override
@@ -63,6 +67,7 @@ public class MainPanel  extends JFrame {
                     e1.printStackTrace();
                 }
 
+                totalLineasArchivo = count;
                 textAreaConsola.append(count + " lineas");
 
                 textAreaConsola.append("\n");
@@ -75,14 +80,13 @@ public class MainPanel  extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (!Util.esFormatoCSVCorrecto(textFieldPath.getText())) {
+                if (!Util.esFormatoCSVCorrecto(textFieldPath.getText(),totalLineasArchivo)) {
                     textAreaConsola.setForeground(Color.RED);
                     textAreaConsola.append("El archivo no tiene el formato correcto ");
                     textAreaConsola.append("\n");
                     textAreaConsola.setForeground(Color.BLACK);
 
                     // habilitar boton iniciar
-
                     textAreaConsola.append("\n");
                     return;
                 }
@@ -90,22 +94,46 @@ public class MainPanel  extends JFrame {
                 //divide  el archivo
 
                 textAreaConsola.append("Dividiendo archivo...");
-                textAreaConsola.append("\n");
-                if (!Util.dividirArchivo(textFieldPath.getText())) {
+textAreaConsola.append("\n");
+//
+//SwingWorker<Void, Void> worker = new SwingWorker<>() {
+//    @Override
+//    protected Void doInBackground() {
+//        if (!Util.dividirArchivo(textFieldPath.getText())) {
+//            textAreaConsola.append("Error al dividir el archivo ");
+//            textAreaConsola.append("\n");
+//            return null;
+//        }
+//        textAreaConsola.append("Archivo dividido");
+//        textAreaConsola.append("\n");
+//        return null;
+//    }
+//
+//    @Override
+//    protected void done() {
+//        buttonIniciar.setEnabled(false);
+//        buttonAbrir.setEnabled(false);
+//        textAreaConsola.append("Iniciando procesamiento...");
+//        textAreaConsola.append("\n");
+//
+//        buttonLimpiar.setEnabled(false);
+//        // processar CDR
+//        CDR cdr = new CDR();
+//        cdr.procesarCDR();
+//    }
+//};
+//
+//worker.execute();
 
-                    textAreaConsola.append("Error al dividir el archivo ");
-                    textAreaConsola.append("\n");
-
-                    return;
-                }
-                textAreaConsola.append("Archivo dividido");
-                textAreaConsola.append("\n");
                 buttonIniciar.setEnabled(false);
+       buttonAbrir.setEnabled(false);
+       textAreaConsola.append("Iniciando procesamiento...");
+       textAreaConsola.append("\n");
 
-                buttonAbrir.setEnabled(false);
-                textAreaConsola.append("Iniciando procesamiento...");
-                textAreaConsola.append("\n");
+       buttonLimpiar.setEnabled(false);
 
+      CDR cdr = new CDR();
+       cdr.procesarCDR();
             }
         });
         buttonLimpiar.addActionListener(new ActionListener() {
@@ -119,11 +147,14 @@ public class MainPanel  extends JFrame {
         });
     }
 
+
+
     // metodo que imprime en consola
     public void printToConsole(String message) {
         textAreaConsola.append(message);
         textAreaConsola.append("\n");
     }
+
 
 
 }

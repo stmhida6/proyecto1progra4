@@ -1,26 +1,30 @@
 package org.proyecto.util;
+import org.proyecto.gui.MainPanel;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
+import org.proyecto.gui.MainPanel;
 
 
 public class Util
 {
-    //clase con util para el proyecto
 
-    //constructor de la clase
     public Util()
     {
 
     }
 
-    public static boolean  esFormatoCSVCorrecto(String rutaArchivo) {
+    public static boolean  esFormatoCSVCorrecto(String rutaArchivo, int totalLineasArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            // iniciar progresbar progressBar1
+
             String line;
             String[] values;
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 
             while ((line = br.readLine()) != null) {
                 values = line.split(",");
