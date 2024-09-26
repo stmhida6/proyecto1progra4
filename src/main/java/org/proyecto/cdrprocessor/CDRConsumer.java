@@ -1,12 +1,12 @@
 package org.proyecto.cdrprocessor;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,14 +16,13 @@ public class CDRConsumer implements Runnable {
 
     private final String idConsumidor;
 
-   // private PrintWriter impresora;
+    // private PrintWriter impresora;
 
     private static final Lock lock = new ReentrantLock();
 
     public CDRConsumer(BufferCompartido buffer, String idConsumidor) throws IOException {
         this.buffer = buffer;
         this.idConsumidor = idConsumidor;
-     //   this.impresora = new PrintWriter(new FileWriter(rutaArchivo, true));
     }
 
     @Override
@@ -31,20 +30,23 @@ public class CDRConsumer implements Runnable {
 
         Connection conexion = null;
         PreparedStatement ps = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        Map<Long, CuentaInfo> cuentasMap = new HashMap<>();
+        //Map<Long, CuentaInfo> cuentasMap = new HashMap<>();
 
         try {
-          //  conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/app_db", "db_user", "db_user_pass");
-            //System.out.println(buffer.size());
-            while (true) {
-
-                if (!buffer.size()) {
-                    break;
+            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+           // System.out.println(buffer.isEmpty());
+              while (true) {
+         //   while (!buffer.isEmpty() || buffer.hasProducers()) {
+                // Loop body
+                if (!buffer.hasProducers() && buffer.isEmpty()) {
+                    System.out.println("No quedan más elementos por consumir y la producción ha finalizado.");
+                    break; // Salir del ciclo si no hay más elementos y la producción ha terminado
                 }
 
                 String mensaje = buffer.consumir();
-             //   System.out.println("mensaje"+mensaje);
+                //   System.out.println("mensaje"+mensaje);
 
                 lock.lock();
                 try {
@@ -55,23 +57,36 @@ public class CDRConsumer implements Runnable {
                         String numeroDelQueLlama = partes[1];
                         String numeroAlQueLlama = partes[2];
                         String timestampLlamada = partes[3];
-                        String duracionLlamada = partes[4];
-                        String tarifaMinuto = partes[5];
+                        int  duracionLlamada = Integer.parseInt(partes[4]);
+                        double tarifaMinuto = Double.parseDouble(partes[5]);
                         String categoriaLlamada = partes[6];
+                      //  String idProductor = partes[7];
+                        String sql = "INSERT INTO llamada (numero_cuenta, numero_del_que_llama, numero_al_que_llama, timestamp_llamada,duracion_llamada,tarifa_minuto,categoria_llamada) VALUES (?, ?, ?, ?, ?, ? ,?)";
+                        ps = conexion.prepareStatement(sql);
+                        ps.setString(1, numeroCuenta);
+                        ps.setString(2, numeroDelQueLlama);
+                        ps.setString(3, numeroAlQueLlama);
+                        ps.setString(4, timestampLlamada);
+                       ps.setInt(5, duracionLlamada);
+                        ps.setDouble(6, tarifaMinuto);
+                       ps.setString(7, categoriaLlamada);
+                        ps.executeUpdate();
+                        String salida = numeroCuenta + " " + numeroDelQueLlama + " " + numeroAlQueLlama + " " + timestampLlamada + " " + duracionLlamada + " " + tarifaMinuto + " " + categoriaLlamada;
 
 
-                     System.out.println("Consumido por " + idConsumidor + " : "+ mensaje );
+                        System.out.println("Consumido por " + idConsumidor + " : " + salida);
                     }
                 } finally {
                     lock.unlock();
                 }
 
             }
-         //   System.out.println("fin de archivo consumidor");
-        } catch (InterruptedException  e) {
+          //  System.out.println("fin del consumidor");
+         //   Thread.currentThread().interrupt();
+        } catch (InterruptedException | SQLException  e) {
             Thread.currentThread().interrupt();
         } finally {
-           // impresora.close();
+            // impresora.close();
             try {
                 if (ps != null) {
                     ps.close();

@@ -12,7 +12,7 @@ public class MainPanel  extends JFrame {
 
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
-    public JTextArea textAreaConsola;
+    private JTextArea textAreaConsola;
     private JButton buttonAbrir;
     private JTextField textFieldPath;
     private JButton buttonIniciar;
@@ -132,8 +132,11 @@ textAreaConsola.append("\n");
 
        buttonLimpiar.setEnabled(false);
 
-      CDR cdr = new CDR();
+      CDR cdr = new CDR(MainPanel.this);
        cdr.procesarCDR();
+       buttonLimpiar.setEnabled(true);
+         buttonAbrir.setEnabled(true);
+            buttonIniciar.setEnabled(true);
             }
         });
         buttonLimpiar.addActionListener(new ActionListener() {
@@ -151,6 +154,7 @@ textAreaConsola.append("\n");
 
     // metodo que imprime en consola
     public void printToConsole(String message) {
+        System.out.println(message);
         textAreaConsola.append(message);
         textAreaConsola.append("\n");
     }
