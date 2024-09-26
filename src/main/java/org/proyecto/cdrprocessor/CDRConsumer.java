@@ -50,8 +50,8 @@ public class CDRConsumer implements Runnable {
 
                 lock.lock();
                 try {
-                    String[] partes = mensaje.split(",", 7);
-                    if (partes.length == 7) {
+                    String[] partes = mensaje.split(",", 8);
+                    if (partes.length == 8) {
 
                         String numeroCuenta = partes[0];
                         String numeroDelQueLlama = partes[1];
@@ -59,19 +59,25 @@ public class CDRConsumer implements Runnable {
                         String timestampLlamada = partes[3];
                         int  duracionLlamada = Integer.parseInt(partes[4]);
                         double tarifaMinuto = Double.parseDouble(partes[5]);
+                        double costoLlamada = Math.round(duracionLlamada * tarifaMinuto * 1000.0) / 1000.0;
                         String categoriaLlamada = partes[6];
-                      //  String idProductor = partes[7];
-                        String sql = "INSERT INTO llamada (numero_cuenta, numero_del_que_llama, numero_al_que_llama, timestamp_llamada,duracion_llamada,tarifa_minuto,categoria_llamada) VALUES (?, ?, ?, ?, ?, ? ,?)";
+                        String idProductor = partes[7];
+
+                        String sql = "INSERT INTO llamada (numero_cuenta, numero_del_que_llama, numero_al_que_llama, timestamp_llamada,duracion_llamada,tarifa_minuto,costo_llamada,categoria_llamada,productor,consumidor, fecha) VALUES (?, ?, ?, ?, ?, ? , ?, ?, ?, ?,now())";
                         ps = conexion.prepareStatement(sql);
                         ps.setString(1, numeroCuenta);
                         ps.setString(2, numeroDelQueLlama);
                         ps.setString(3, numeroAlQueLlama);
                         ps.setString(4, timestampLlamada);
-                       ps.setInt(5, duracionLlamada);
+                        ps.setInt(5, duracionLlamada);
                         ps.setDouble(6, tarifaMinuto);
-                       ps.setString(7, categoriaLlamada);
+                        ps.setDouble(7, costoLlamada);
+                        ps.setString(8, categoriaLlamada);
+                        ps.setString(9, idProductor);
+                        ps.setString(10, idConsumidor);
+
                         ps.executeUpdate();
-                        String salida = numeroCuenta + " " + numeroDelQueLlama + " " + numeroAlQueLlama + " " + timestampLlamada + " " + duracionLlamada + " " + tarifaMinuto + " " + categoriaLlamada;
+                        String salida = numeroCuenta + " " + numeroDelQueLlama + " " + numeroAlQueLlama + " " + timestampLlamada + " " + duracionLlamada + " " + tarifaMinuto + " " + categoriaLlamada+ " " + idProductor+ " " + idConsumidor;
 
 
                         System.out.println("Consumido por " + idConsumidor + " : " + salida);
