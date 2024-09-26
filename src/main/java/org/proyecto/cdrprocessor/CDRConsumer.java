@@ -87,7 +87,7 @@ public class CDRConsumer implements Runnable {
                 }
 
             }
-          //  System.out.println("fin del consumidor");
+            System.out.println("fin del consumidor");
          //   Thread.currentThread().interrupt();
         } catch (InterruptedException | SQLException  e) {
             Thread.currentThread().interrupt();
