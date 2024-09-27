@@ -1,21 +1,19 @@
 package org.proyecto.cdrprocessor;
 
-public class CuentaInfo {
-    int totalMinutos;
+class CuentaInfo {
+    int totalLlamadas;
+    int totalDuracion;
     double costoTotal;
 
-    public CuentaInfo() {
-        this.totalMinutos = 0;
-        this.costoTotal = 0.0;
+    public CuentaInfo(int totalLlamadas, int totalDuracion, double costoTotal) {
+        this.totalLlamadas = totalLlamadas;
+        this.totalDuracion = totalDuracion;
+        this.costoTotal = costoTotal;
     }
 
-    //public void agregarLlamada(int minutos, double tarifaMinuto) {
-    public void agregarLlamada(String duracionLlamada, String tarifaMinuto) {
-        int minutos = Integer.parseInt(duracionLlamada);
-        double tarifaMinutoD = Double.parseDouble(tarifaMinuto);
-
-
-        this.totalMinutos += minutos;
-        this.costoTotal += minutos * tarifaMinutoD;
+    public void agregarLlamada(int duracion, double costo) {
+        this.totalLlamadas++;
+        this.totalDuracion += duracion;
+        this.costoTotal += costo;
     }
 }
