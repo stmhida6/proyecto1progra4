@@ -51,9 +51,9 @@ public class MiAplicacion extends JFrame {
         botonAccion2.setBackground(Color.RED);
 
         // s botones al panel
-        JLabel labelP1 = new JLabel("Productor 1");
-        JLabel labelP2 = new JLabel("Productor 2");
-        JLabel labelP3 = new JLabel("Productor 1");
+        JLabel labelP1 = new JLabel("0");
+        JLabel labelP2 = new JLabel("0");
+        JLabel labelP3 = new JLabel("0");
         JLabel tiempoTotal = new JLabel("Tiempo Total: 00:00:00");
         panelBotonesAccion.add(labelP1);
         panelBotonesAccion.add(labelP2);
@@ -72,39 +72,18 @@ public class MiAplicacion extends JFrame {
         // 📂
         buttonAbrir.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-//                // Escribir lo que está en el JTextField en el JTextArea
-//                String texto = textFieldPath.getText();
-//                textAreaConsola.append("Entrada: " + texto + "\n");
-//                textFieldPath.setText(""); // Limpiar el campo de texto
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.home") + "/Downloads"));
-                fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("CSV files", "csv"));
-                fileChooser.showOpenDialog(null);
-                if (fileChooser.getSelectedFile() == null) {
+                public void actionPerformed(ActionEvent e) {
+                String file = FileController.seleccionarArchivo();
+                if (file == null) {
                     return;
                 }
-                String file = fileChooser.getSelectedFile().getAbsolutePath();
-
                 textFieldPath.setText(file);
                 buttonIniciar.setEnabled(true);
                 textAreaConsola.setText("Archivo Seleccionado: " + file);
                 textAreaConsola.append("\n");
-                textAreaConsola.append("Tamaño del archivo: " + fileChooser.getSelectedFile().length() + " bytes");
-
-                int count = 0;
-                try {
-                    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(file));
-                    while (reader.readLine() != null) count++;
-                    reader.close();
-                } catch (java.io.IOException e1) {
-                    e1.printStackTrace();
-                }
-
-                totalLineasArchivo = count;
-                textAreaConsola.append(count + " lineas");
-
+                textAreaConsola.append("Tamaño del archivo: " + new java.io.File(file).length() + " bytes");
+                totalLineasArchivo = FileController.contarLineas(file);
+                textAreaConsola.append(totalLineasArchivo + " lineas");
                 textAreaConsola.append("\n");
             }
         });
@@ -123,13 +102,13 @@ public class MiAplicacion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 textAreaConsola.setText("");
                 textFieldPath.setText("");
-                buttonIniciar.setEnabled(false);
+                buttonIniciar.setEnabled(true);
                 buttonAbrir.setEnabled(true);
                 totalLineasArchivo = 0;
                 tiempoTotal.setText("Tiempo Total: 00:00:00");
-                labelP3.setText("Productor 3");
-                labelP2.setText("Productor 2");
-                labelP1.setText("Productor 1");
+                labelP3.setText("0");
+                labelP2.setText("0");
+                labelP1.setText("0");
 
 
 
@@ -140,6 +119,15 @@ public class MiAplicacion extends JFrame {
         buttonIniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (textFieldPath.getText().isEmpty()) {
+                    textAreaConsola.append("Por favor, seleccione un archivo antes de iniciar el procesamiento.\n");
+                    return;
+                }
+                if (!Util.esFormatoCSVCorrecto(textFieldPath.getText(), totalLineasArchivo)) {
+                    textAreaConsola.append("El archivo NO tiene el formato correcto!!! \n");
+                    return;
+                }
+
                 if (!Util.esFormatoCSVCorrecto(textFieldPath.getText(), totalLineasArchivo)) {
                     textAreaConsola.append("El archivo NO tiene el formato correcto!!! \n");
                     return;
@@ -196,9 +184,7 @@ public class MiAplicacion extends JFrame {
                         };
                         worker.execute();
 
-                       // buttonLimpiar.setEnabled(true);
-                       // buttonAbrir.setEnabled(true);
-                      //  buttonIniciar.setEnabled(true);
+
                     });
                 }).start();
 

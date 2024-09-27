@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="probar usar dos tablas para insertar y obtener total por cuenta">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MiAplicacion.java" afterDir="false" />
+    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="se cambio la interfaz, causo mucho sproblema el editor swing de intelliJ IDEA">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/FileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CuentaInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CuentaInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MainPanel.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MainPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MiAplicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MiAplicacion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/util/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;stmhida6&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/stmhida6/proyecto1progra4.git&quot;,
+    &quot;accountId&quot;: &quot;7ffd73b0-bb0f-40ea-84b6-32551b771073&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -162,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727370808999</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="se cambio la interfaz, causo mucho sproblema el editor swing de intelliJ IDEA">
+      <option name="closed" value="true" />
+      <created>1727410407092</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727410407092</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -176,6 +191,7 @@
     <MESSAGE value="al fin inserta a la base sin que se trabe" />
     <MESSAGE value="mejor en la base" />
     <MESSAGE value="probar usar dos tablas para insertar y obtener total por cuenta" />
-    <option name="LAST_COMMIT_MESSAGE" value="probar usar dos tablas para insertar y obtener total por cuenta" />
+    <MESSAGE value="se cambio la interfaz, causo mucho sproblema el editor swing de intelliJ IDEA" />
+    <option name="LAST_COMMIT_MESSAGE" value="se cambio la interfaz, causo mucho sproblema el editor swing de intelliJ IDEA" />
   </component>
 </project>

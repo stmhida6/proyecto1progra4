@@ -12,7 +12,7 @@ public class CDR {
     private JLabel labelP3;
 
     //constructor
-    public CDR(JTextArea textAreaConsola,JLabel labelP1,JLabel labelP2,JLabel labelP3) {
+    public CDR(JTextArea textAreaConsola, JLabel labelP1, JLabel labelP2, JLabel labelP3) {
         this.textAreaConsola = textAreaConsola;
         this.labelP1 = labelP1;
         this.labelP2 = labelP2;
@@ -23,10 +23,9 @@ public class CDR {
     public void procesarCDR() {
 
         textAreaConsola.append("Procesando CDR...\n");
+        //SwingUtilities.invokeLater(() -> textAreaConsola.append("Texto desde un hilo...\n"));
+
         BufferCompartido buffer = new BufferCompartido(10);
-
-
-
 
         Thread productor1 = new Thread(new CDRProducer(buffer, "part1.csv", "Productor 1",textAreaConsola,labelP1));
         Thread productor2 = new Thread(new CDRProducer(buffer, "part2.csv", "Productor 2",textAreaConsola,labelP2));
@@ -54,19 +53,21 @@ public class CDR {
 
         try {
             productor1.join();
+            textAreaConsola.append("Productor 1 ha terminado.\n");
+
             productor2.join();
+            textAreaConsola.append("Productor 2 ha terminado.\n");
+
             productor3.join();
+            textAreaConsola.append("Productor 3 ha terminado.\n");
+
             if (consumidor1 != null) {
                 consumidor1.join();
             }
             if (consumidor2 != null) {
                 consumidor2.join();
             }
-            //matar hilos
 
-            //consumidor1.interrupt();
-
-            //consumidor2.interrupt();
 
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

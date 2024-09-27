@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 import java.sql.*;
 
 public class Util
-{
+{ private static final String DB_URL = "jdbc:mysql://10.49.1.135:3306/upana";
+    private static final String DB_USER = "db_user";
+    private static final String DB_PASS = "db_user_pass";
 
     public Util()
     {
@@ -102,7 +104,7 @@ public class Util
         ResultSet rs = null;
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+            conexion = DriverManager.getConnection(DB_URL , DB_USER , DB_PASS);
             String sql = "SELECT numero_cuenta, numero_del_que_llama, numero_al_que_llama, timestamp_llamada, duracion_llamada, tarifa_minuto, costo_llamada, categoria_llamada, productor, consumidor FROM llamada WHERE numero_cuenta = ?";
             ps = conexion.prepareStatement(sql);
             ps.setString(1, numeroCuenta);
@@ -149,7 +151,7 @@ public class Util
         ResultSet rs = null;
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+            conexion = DriverManager.getConnection(DB_URL , DB_USER , DB_PASS);
             String sql = "SELECT * FROM cuenta";
             ps = conexion.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -189,7 +191,7 @@ public class Util
         ResultSet rs = null;
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+            conexion = DriverManager.getConnection(DB_URL , DB_USER , DB_PASS);
             String sql = "SELECT * FROM cuenta WHERE numero_cuenta = ?";
             ps = conexion.prepareStatement(sql);
             ps.setString(1, numeroCuenta);
@@ -234,7 +236,7 @@ public class Util
         ResultSet rs = null;
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+            conexion = DriverManager.getConnection(DB_URL , DB_USER , DB_PASS);
             String sql = "SELECT numero_cuenta FROM cuenta";
             ps = conexion.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -269,7 +271,7 @@ public class Util
         Statement stmt = null;
 
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
+            conexion = DriverManager.getConnection(DB_URL , DB_USER , DB_PASS);
             stmt = conexion.createStatement();
             stmt.executeUpdate("DELETE FROM llamada");
             stmt.executeUpdate("DELETE FROM cuenta");
