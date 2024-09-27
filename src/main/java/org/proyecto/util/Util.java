@@ -1,10 +1,10 @@
 package org.proyecto.util;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import java.sql.*;
@@ -21,8 +21,6 @@ public class Util
 
     public static boolean  esFormatoCSVCorrecto(String rutaArchivo, int totalLineasArchivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            // iniciar progresbar progressBar1
-
             String line;
             String[] values;
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -54,9 +52,9 @@ public class Util
     public static boolean dividirArchivo(String rutaArchivo) {
         try {
             // Borrar los archivos part1.csv, part2.csv, part3.csv si existen
-            java.io.File file1 = new java.io.File("src/main/resources/part1.csv");
-            java.io.File file2 = new java.io.File("src/main/resources/part2.csv");
-            java.io.File file3 = new java.io.File("src/main/resources/part3.csv");
+          File file1 = new File("src/main/resources/part1.csv");
+            File file2 = new File("src/main/resources/part2.csv");
+           File file3 = new File("src/main/resources/part3.csv");
             if (file1.exists()) {
                 file1.delete();
             }
@@ -67,8 +65,8 @@ public class Util
                 file3.delete();
             }
 
-            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(rutaArchivo));
-            java.util.List<String> lines = new java.util.ArrayList<>();
+         BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo));
+         List<String> lines = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
@@ -81,7 +79,7 @@ public class Util
             for (int i = 0; i < 3; i++) {
                 int start = i * partSize;
                 int end = (i == 2) ? totalLines : (i + 1) * partSize;
-                java.io.FileWriter writer = new java.io.FileWriter("src/main/resources/part" + (i + 1) + ".csv");
+               FileWriter writer = new FileWriter("src/main/resources/part" + (i + 1) + ".csv");
                 for (int j = start; j < end; j++) {
                     writer.write(lines.get(j) + "\n");
                 }
@@ -89,7 +87,7 @@ public class Util
             }
 
             return true;
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
 
             return false;
@@ -97,8 +95,8 @@ public class Util
     }
 
 
-    public static java.util.List<Object[]> obtenerLlamadas(String numeroCuenta) {
-        java.util.List<Object[]> llamadas = new java.util.ArrayList<>();
+    public static List<Object[]> obtenerLlamadas(String numeroCuenta) {
+        List<Object[]> llamadas = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -144,8 +142,8 @@ public class Util
 
         return llamadas;
     }
-    public static java.util.List<Object[]> obtenerCuentas2() {
-        java.util.List<Object[]> cuentas = new java.util.ArrayList<>();
+    public static List<Object[]> obtenerCuentas2() {
+       List<Object[]> cuentas = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -198,10 +196,6 @@ public class Util
             rs = ps.executeQuery();
 
             if (rs.next()) {
-//                cuenta = new Object[rs.getMetaData().getColumnCount()];
-//                for (int i = 0; i < cuenta.length; i++) {
-//                    cuenta[i] = rs.getObject(i + 1);
-//                }
                 cuenta = new Object[4];
                 cuenta[0] = rs.getString("numero_cuenta");
                 cuenta[1] = rs.getInt("total_llamadas");
@@ -229,8 +223,8 @@ public class Util
         return cuenta;
     }
 
-    public static java.util.List<String> obtenerCuentas() {
-        java.util.List<String> cuentas = new java.util.ArrayList<>();
+    public static List<String> obtenerCuentas() {
+        List<String> cuentas = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -240,6 +234,10 @@ public class Util
             String sql = "SELECT numero_cuenta FROM cuenta";
             ps = conexion.prepareStatement(sql);
             rs = ps.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                return cuentas; // Retornar lista vacía si no hay resultados
+            }
 
             while (rs.next()) {
                 cuentas.add(rs.getString("numero_cuenta"));

@@ -38,9 +38,7 @@ public class CDRConsumer implements Runnable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss - dd/MM/yyyy"));
 
-        //Map<Long, CuentaInfo> cuentasMap = new HashMap<>();
-
-        try {
+          try {
             conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
             // System.out.println(buffer.isEmpty());
             while (true) {
@@ -102,9 +100,7 @@ public class CDRConsumer implements Runnable {
                         ps.executeUpdate();
 
                         String salida = numeroCuenta + " " + numeroDelQueLlama + " " + numeroAlQueLlama + " " + timestampLlamada + " " + duracionLlamada + " " + tarifaMinuto + " " + categoriaLlamada+ " " + idProductor+ " " + idConsumidor;
-
                         textAreaConsola.append("Consumido por  " + idConsumidor + " -Cuenta: " + numeroCuenta +" Hora:"+ currentDateTime +"\n");
-
                         System.out.println("Consumido por " + idConsumidor + " : " + salida);
                     }
                 } finally {

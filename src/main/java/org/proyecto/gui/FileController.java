@@ -1,6 +1,7 @@
 package org.proyecto.gui;
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ public class FileController {
     public static String seleccionarArchivo() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.home") + "/Downloads"));
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Downloads"));
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("CSV files", "csv"));
         fileChooser.showOpenDialog(null);
         if (fileChooser.getSelectedFile() == null) return null;

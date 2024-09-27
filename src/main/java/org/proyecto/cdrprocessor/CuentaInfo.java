@@ -1,5 +1,6 @@
 package org.proyecto.cdrprocessor;
 
+// Clase que almacena la información de una cuenta para realizar los calculos
 class CuentaInfo {
     int totalLlamadas;
     int totalDuracion;

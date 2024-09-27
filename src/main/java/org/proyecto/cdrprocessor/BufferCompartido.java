@@ -9,10 +9,7 @@ public class BufferCompartido {
     private boolean producersActive = true;
 
     public BufferCompartido(int capacidad) {
-
-
         this.queue = new ArrayBlockingQueue<>(capacidad);
-
     }
 
     public void producir(String item) throws InterruptedException {
@@ -37,6 +34,8 @@ public class BufferCompartido {
     public boolean isEmpty() {
         return queue.isEmpty();
     }
+
+    //funciones que se conrola si el buffer esta vacio o si hay productores activos
 
     public synchronized void setProducersActive(boolean active) {
         this.producersActive = active;

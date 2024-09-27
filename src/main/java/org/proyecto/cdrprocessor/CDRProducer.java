@@ -7,16 +7,13 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 public class CDRProducer implements Runnable {
+
     private final BufferCompartido buffer;
-
     private final String rutaArchivo;
-
     private final String idProductor;
     private JTextArea textAreaConsola;
     private JLabel labelP;
-
 
     public CDRProducer(BufferCompartido buffer, String rutaArchivo, String idProductor, JTextArea textAreaConsola,JLabel labelP) {
         this.buffer = buffer;
@@ -24,7 +21,6 @@ public class CDRProducer implements Runnable {
         this.idProductor = idProductor;
         this.textAreaConsola = textAreaConsola;
         this.labelP = labelP;
-
     }
 
     @Override
@@ -44,8 +40,6 @@ public class CDRProducer implements Runnable {
 
              //   Thread.sleep((int) (Math.random() * 1000));
             //    mainPanel.printToConsole("Producido por  " + idProductor + " : " + mensaje+ " en el archivo: "+rutaArchivo);
-
-
 
             }
             System.out.println("fin de archivo");
