@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="refactorizando codigo y limpiando">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="mejoras en el codigo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/BufferCompartido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/BufferCompartido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CuentaInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CuentaInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MiAplicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/gui/MiAplicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/util/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727461912085</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="mejoras en el codigo">
+      <option name="closed" value="true" />
+      <created>1727476154730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727476154730</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -206,6 +208,7 @@
     <MESSAGE value="probar usar dos tablas para insertar y obtener total por cuenta" />
     <MESSAGE value="se cambio la interfaz, causo mucho sproblema el editor swing de intelliJ IDEA" />
     <MESSAGE value="refactorizando codigo y limpiando" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactorizando codigo y limpiando" />
+    <MESSAGE value="mejoras en el codigo" />
+    <option name="LAST_COMMIT_MESSAGE" value="mejoras en el codigo" />
   </component>
 </project>

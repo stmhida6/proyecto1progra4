@@ -32,28 +32,17 @@ public class CDRProducer implements Runnable {
                 buffer.producir(mensaje);
                 String cuenta = mensaje.split(",")[0];
                 String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss - dd/MM/yyyy"));
-
                 textAreaConsola.append("Producido por  " + idProductor + " -Cuenta: " + cuenta +" Hora:"+ currentDateTime +"\n");
                 System.out.println("Producido por  " + idProductor + " : " + mensaje+ " en el archivo: "+rutaArchivo);
+
                 labelP.setText("Producciones: " + (Integer.parseInt(labelP.getText().replaceAll("\\D", "")) + 1));
-
-
-             //   Thread.sleep((int) (Math.random() * 1000));
-            //    mainPanel.printToConsole("Producido por  " + idProductor + " : " + mensaje+ " en el archivo: "+rutaArchivo);
 
             }
             System.out.println("fin de archivo");
             buffer.setProducersActive(false);
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
-        } //finally {
-//            try {
-//                buffer.producir("END," + idProductor);
-//            } catch (InterruptedException e) {
-//                Thread.currentThread().interrupt();
-//            }
-
-        //      }
+        }
 
     }
 

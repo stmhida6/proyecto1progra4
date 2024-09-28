@@ -30,6 +30,8 @@ public class CDR {
         Thread productor1 = new Thread(new CDRProducer(buffer, "part1.csv", "Productor 1",textAreaConsola,labelP1));
         Thread productor2 = new Thread(new CDRProducer(buffer, "part2.csv", "Productor 2",textAreaConsola,labelP2));
         Thread productor3 = new Thread(new CDRProducer(buffer, "part3.csv", "Productor 3",textAreaConsola,labelP3));
+
+
         productor1.start();
         productor2.start();
         productor3.start();

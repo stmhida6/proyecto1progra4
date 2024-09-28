@@ -42,7 +42,6 @@ public class CDRConsumer implements Runnable {
             conexion = DriverManager.getConnection("jdbc:mysql://10.49.1.135:3306/upana", "db_user", "db_user_pass");
             // System.out.println(buffer.isEmpty());
             while (true) {
-                //   while (!buffer.isEmpty() || buffer.hasProducers()) {
                 // Loop body
                 if (!buffer.hasProducers() && buffer.isEmpty()) {
                     System.out.println("No quedan más elementos por consumir y la producción ha finalizado.");
