@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="mejoras en el codigo">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/proyecto/cdrprocessor/CDRProducer.java" afterDir="false" />
-    </list>
+    <list default="true" id="03dccea8-a800-4276-908b-e79ef88b6925" name="Changes" comment="mejoras en el codigo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -192,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727476154730</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="mejoras en el codigo">
+      <option name="closed" value="true" />
+      <created>1727498434734</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727498434734</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="UnknownFeatures">
